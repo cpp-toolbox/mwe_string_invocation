@@ -1,0 +1,10 @@
+[requires]
+glm/cci.20230113
+fmt/11.2.0
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout

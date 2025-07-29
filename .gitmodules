@@ -19,3 +19,21 @@
 [submodule "src/utility/logger"]
 	path = src/utility/logger
 	url = git@github.com:cpp-toolbox/logger.git
+[submodule "src/graphics/vertex_geometry"]
+	path = src/graphics/vertex_geometry
+	url = git@github.com:cpp-toolbox/vertex_geometry.git
+[submodule "src/graphics/draw_info"]
+	path = src/graphics/draw_info
+	url = git@github.com:cpp-toolbox/draw_info.git
+[submodule "src/utility/transform"]
+	path = src/utility/transform
+	url = git@github.com:cpp-toolbox/transform.git
+[submodule "src/utility/unique_id_generator"]
+	path = src/utility/unique_id_generator
+	url = git@github.com:cpp-toolbox/unique_id_generator.git
+[submodule "src/utility/turns"]
+	path = src/utility/turns
+	url = git@github.com:cpp-toolbox/turns.git
+[submodule "src/utility/fs_utils"]
+	path = src/utility/fs_utils
+	url = git@github.com:cpp-toolbox/fs_utils.git

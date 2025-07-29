@@ -10,6 +10,11 @@
 
 ConsoleLogger logger;
 
+// NOTE: aboutodo
+// * was adding a whitelist feature that goes all the way down to mfc
+// * then we can do that only on the functions we want to do from vertex_geom
+// * then we can integrate that into the other project.
+
 int main() {
     std::vector<meta_utils::MetaType> extended_concrete_types = meta_utils::concrete_types;
     meta_utils::MetaType glm_vec3_type("glm::vec3", "[](const std::string &s) { return glm_utils::parse_vec3(s); }",
@@ -31,8 +36,8 @@ int main() {
     std::unordered_map<std::string, std::function<meta_utils::MetaType(meta_utils::MetaType)>>
         extended_generic_type_to_meta_type_constructor = meta_utils::generic_type_to_metatype_constructor;
 
-    meta_utils::generate_string_invokers("src/functions/functions.hpp", "src/functions/functions.cpp",
-                                         extended_concrete_types);
+    meta_utils::generate_string_invokers_from_source_code("src/functions/functions.hpp", "src/functions/functions.cpp",
+                                                          extended_concrete_types, true);
 
     std::cout << "Enter function invocation strings (type 'quit' to exit):\n";
 

@@ -37,7 +37,8 @@ int main() {
         extended_generic_type_to_meta_type_constructor = meta_utils::generic_type_to_metatype_constructor;
 
     meta_utils::generate_string_invokers_from_source_code("src/functions/functions.hpp", "src/functions/functions.cpp",
-                                                          extended_concrete_types, true);
+                                                          extended_concrete_types, true, {"int add(int x, int y)"},
+                                                          meta_utils::FilterMode::Whitelist);
 
     std::cout << "Enter function invocation strings (type 'quit' to exit):\n";
 

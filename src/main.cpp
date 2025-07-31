@@ -14,7 +14,10 @@
 
 ConsoleLogger logger;
 
+void setup_meta_utils() {}
+
 int main() {
+
     std::vector<meta_utils::MetaType> extended_concrete_types = meta_utils::concrete_types;
     meta_utils::MetaType glm_vec3_type("glm::vec3", "[](const std::string &s) { return glm_utils::parse_vec3(s); }",
                                        "[](const glm::vec3 &v) { return vec3_to_string(v); }",
@@ -23,7 +26,7 @@ int main() {
                                        "[](const glm::vec2 &v) { return vec2_to_string(v); }",
                                        regex_utils::float_tuple);
 
-    meta_utils::MetaType meta_type_type("meta_utils::MetaType", "", "", "MetaType");
+    meta_utils::MetaType meta_type_type("meta_utils::MetaType", "", "", R"(.*)");
 
     extended_concrete_types.push_back(glm_vec3_type);
     extended_concrete_types.push_back(glm_vec2_type);
@@ -50,12 +53,22 @@ int main() {
 
     meta_utils::generate_string_invokers_from_source_code(
         "src/graphics/vertex_geometry/vertex_geometry.hpp", "src/graphics/vertex_geometry/vertex_geometry.cpp",
-        extended_concrete_types, true,
+        extended_concrete_types, true, true,
         {" draw_info::IndexedVertexPositions generate_rectangle_between_2d(const "
          "glm::vec2 &p1, const glm::vec2 &p2, float thickness) "},
         meta_utils::FilterMode::Whitelist);
 
-    start_interactive_invoker(extended_concrete_types);
+    auto invocation = "generate_rectangle_between_2d( (0, 0), (1, 1), 0.1 )";
+
+    auto result = invoker_that_returns_draw_info_IndexedVertexPositions(invocation, extended_concrete_types);
+
+    if (result) {
+        std::cout << "it worked" << std::endl;
+    } else {
+        std::cout << "it didn't work" << std::endl;
+    }
+
+    // start_interactive_invoker(extended_concrete_types);
 
     return 0;
 }
